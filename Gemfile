@@ -1,5 +1,5 @@
 source "http://rubygems.org"
-gem 'activemodel'
+gem 'activemodel', '~> 4.0'
 gem 'tzinfo'
 gem 'aws-sdk'
 
