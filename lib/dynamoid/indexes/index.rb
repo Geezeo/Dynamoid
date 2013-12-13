@@ -4,7 +4,7 @@ module Dynamoid #:nodoc:
 
     # The class contains all the information an index contains, including its keys and which attributes it covers.
     class Index
-      attr_accessor :source, :name, :hash_keys, :range_keys
+      attr_accessor :prefix, :source, :name, :hash_keys, :range_keys
       alias_method :range_key?, :range_keys
       
       # Create a new index. Pass either :range => true or :range => :column_name to create a ranged index on that column.
@@ -15,6 +15,7 @@ module Dynamoid #:nodoc:
       # @since 0.2.0      
       def initialize(source, name, options = {})
         @source = source
+        @prefix = options[:prefix] || source.to_s.downcase
         
         if options.delete(:range)
           @range_keys = sort(name)
@@ -48,7 +49,7 @@ module Dynamoid #:nodoc:
       #
       # @since 0.2.0
       def table_name
-        "#{Dynamoid::Config.namespace}_index_#{source.to_s.downcase}_#{name.collect(&:to_s).collect(&:pluralize).join('_and_')}"
+        "#{Dynamoid::Config.namespace}_index_#{prefix}_#{name.collect(&:to_s).collect(&:pluralize).join('_and_')}"
       end
 
       # Given either an object or a list of attributes, generate a hash key and a range key for the index. Optionally pass in 
