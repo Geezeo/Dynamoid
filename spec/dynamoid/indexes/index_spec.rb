@@ -26,6 +26,12 @@ describe "Dynamoid::Indexes::Index" do
   it 'determines its own table name' do
     @index.table_name.should == 'dynamoid_tests_index_user_created_ats_and_names_and_passwords'
   end
+
+  it 'uses a different table prefix if provided' do
+    prefixed_index = Dynamoid::Indexes::Index.new(User, [:password, :name], :range_key => :created_at, :prefix => :prefixed)
+
+    prefixed_index.table_name.should == 'dynamoid_tests_index_prefixed_created_ats_and_names_and_passwords'
+  end
   
   it 'raises an error if a field does not exist' do
     lambda {@index = Dynamoid::Indexes::Index.new(User, [:password, :text])}.should raise_error(Dynamoid::Errors::InvalidField)
