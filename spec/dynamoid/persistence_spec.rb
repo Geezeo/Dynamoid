@@ -10,7 +10,10 @@ describe "Dynamoid::Persistence" do
   context 'without AWS keys' do
     unless ENV['ACCESS_KEY'] && ENV['SECRET_KEY']
       before do
-        Dynamoid::Adapter.delete_table(Address.table_name) if Dynamoid::Adapter.list_tables.include?(Address.table_name)
+        if Dynamoid::Adapter.list_tables.include?(Address.table_name)
+          Dynamoid::Adapter.delete_table(Address.table_name)
+          Dynamoid::Adapter.tables = Dynamoid::Adapter.list_tables
+        end
       end
 
       it 'creates a table' do
@@ -36,7 +39,7 @@ describe "Dynamoid::Persistence" do
       let(:now_f) { now_t.to_f }
       let(:field) { {type: :datetime} }
 
-      it "just returns a Time object" do 
+      it "just returns a Time object" do
         Address.undump_field(now_t, field).should eq(now_t)
       end
 
@@ -51,7 +54,7 @@ describe "Dynamoid::Persistence" do
       context "with no time zones" do
         it "returns the right time from the float argument" do
           time = Address.undump_field(now_f, field)
-          
+
           time.to_time.to_f.should eq(now_f)
           time.zone.should eq(now_dt.zone)
         end

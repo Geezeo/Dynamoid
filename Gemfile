@@ -1,7 +1,7 @@
 source "http://rubygems.org"
 gem 'activemodel', '~> 4.0'
 gem 'tzinfo'
-gem 'aws-sdk'
+gem 'aws-sdk', '~> 1.64.0'
 
 # Add dependencies required to use your gem here.
 # Example:
@@ -12,10 +12,11 @@ gem 'aws-sdk'
 group :development do
   gem "mocha"
   gem "rake"
-  gem "rspec"
+  gem "rspec", '~> 2.14.1'
   gem "bundler"
   gem "jeweler"
   gem "yard"
   gem "redcarpet", '1.17.2'
   gem 'github-markup'
+  gem 'fake_dynamo', '~> 0.1.3'
 end
