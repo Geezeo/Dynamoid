@@ -7,7 +7,7 @@ Gem::Specification.new do |gem|
   gem.license     = 'All rights reserved'
   gem.name        = 'dynamoid'
   gem.summary     = "Keeps your G's, yo."
-  gem.version     = "0.4.2"
+  gem.version     = "0.5.0"
 
   gem.add_development_dependency 'mocha',         '~> 1.1'
   gem.add_development_dependency 'rake',          '~> 10.4'
@@ -18,7 +18,8 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'github-markup', '>= 0'
   gem.add_development_dependency 'fake_dynamo',   '~> 0.1.3'
 
-  gem.add_runtime_dependency     'activemodel',   '< 5.1'
+  gem.add_runtime_dependency     'activesupport', '< 6'
+  gem.add_runtime_dependency     'activemodel',   '< 6'
   gem.add_runtime_dependency     'tzinfo',        '>= 0'
   gem.add_runtime_dependency     'aws-sdk-v1',    '>= 0'
   gem.add_runtime_dependency     'json',          '~> 1.8.3'
