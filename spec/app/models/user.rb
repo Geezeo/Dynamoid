@@ -5,6 +5,7 @@ class User
   field :email
   field :password
   field :last_logged_in_at, :datetime
+  field :ttl, :datetime
   
   index :name
   index :email

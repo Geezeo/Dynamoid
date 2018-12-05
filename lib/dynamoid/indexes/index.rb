@@ -89,6 +89,10 @@ module Dynamoid #:nodoc:
 
         update_index obj, false do |item|
           item.add ids: [obj.id]
+
+          if obj.respond_to? :ttl
+            item.set ttl: obj.ttl.to_f
+          end
         end
       end
 
