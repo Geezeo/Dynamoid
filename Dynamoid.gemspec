@@ -23,4 +23,5 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency     'tzinfo',        '>= 0'
   gem.add_runtime_dependency     'aws-sdk-v1',    '>= 0'
   gem.add_runtime_dependency     'json',          '~> 1.8.3'
+  gem.add_runtime_dependency     'activemodel-serializers-xml', '~> 1.0.2'
 end

@@ -4,6 +4,7 @@ PATH
     dynamoid (0.5.0)
       activemodel (< 6)
       activesupport (< 6)
+      activemodel-serializers-xml (~> 1.0.2)
       aws-sdk-v1
       json (~> 1.8.3)
       tzinfo
@@ -13,6 +14,10 @@ GEM
   specs:
     activemodel (5.0.3)
       activesupport (= 5.0.3)
+    activemodel-serializers-xml (1.0.2)
+      activemodel (> 5.x)
+      activesupport (> 5.x)
+      builder (~> 3.1)
     activesupport (5.0.3)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (~> 0.7)
@@ -21,6 +26,7 @@ GEM
     aws-sdk-v1 (1.67.0)
       json (~> 1.4)
       nokogiri (~> 1)
+    builder (3.2.3)
     concurrent-ruby (1.0.5)
     diff-lcs (1.3)
     fake_dynamo (0.1.4)
@@ -35,7 +41,7 @@ GEM
     minitest (5.10.2)
     mocha (1.2.1)
       metaclass (~> 0.0.1)
-    nokogiri (1.8.2)
+    nokogiri (1.8.5)
       mini_portile2 (~> 2.3.0)
     rack (1.5.2)
     rack-protection (1.5.3)
