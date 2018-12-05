@@ -25,8 +25,8 @@ describe "Dynamoid::Persistence" do
       it 'checks if a table already exists' do
         Address.create_table(:table_name => Address.table_name)
 
-        Address.table_exists?(Address.table_name).should be_true
-        Address.table_exists?('crazytable').should be_false
+        Address.table_exists?(Address.table_name).should be_truthy
+        Address.table_exists?('crazytable').should be_falsy
       end
     end
   end
@@ -200,13 +200,13 @@ describe "Dynamoid::Persistence" do
     it 'checks the conditions on update' do
       @tweet.update(:if => { :count => 5 }) do |t|
         t.add(:count => 3)
-      end.should be_true
+      end.should be_truthy
 
       @tweet.count.should eq(8)
 
       @tweet.update(:if => { :count => 5 }) do |t|
         t.add(:count => 3)
-      end.should be_false
+      end.should be_falsy
 
       @tweet.count.should eq(8)
 
