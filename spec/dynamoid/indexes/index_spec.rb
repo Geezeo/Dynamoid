@@ -4,6 +4,7 @@ describe "Dynamoid::Indexes::Index" do
 
   before do
     @time = DateTime.now
+    @ttl  = DateTime.now + 90
     @index = Dynamoid::Indexes::Index.new(User, [:password, :name], :range_key => :created_at)
   end
 
@@ -76,6 +77,28 @@ describe "Dynamoid::Indexes::Index" do
     @index.save(@user)
 
     Dynamoid::Adapter.read("dynamoid_tests_index_user_names", 'Josh')[:ids].should == Set['test123']
+  end
+
+  it 'sets the TTL of an object that has one, on the index it is associated with' do
+    @index = Dynamoid::Indexes::Index.new(User, :name)
+    @user = User.new(:name => 'Josh', :password => 'test123', :created_at => @time, :id => 'test123', ttl: @ttl)
+
+    @index.save(@user)
+
+    Dynamoid::Adapter.read("dynamoid_tests_index_user_names", 'Josh')[:ttl].should == @ttl.to_f
+  end
+
+  it "doesn't set the TTL of an object that doesn't respond to it, on the index it is associated with" do
+    @index = Dynamoid::Indexes::Index.new(User, :name)
+    @user = User.new(:name => 'Josh', :password => 'test123', :created_at => @time, :id => 'test123', ttl: @ttl)
+
+    def @user.respond_to?(meth, *args)
+      meth == :ttl ? false : super
+    end
+
+    @index.save(@user)
+
+    Dynamoid::Adapter.read("dynamoid_tests_index_user_names", 'Josh')[:ttl].should be_nil
   end
 
   it 'saves an object to the index it is associated with with a range' do

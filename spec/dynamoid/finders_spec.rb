@@ -16,7 +16,7 @@ describe "Dynamoid::Finders" do
   it 'is not a new object' do
     found = Address.find(@address.id)
     
-    found.new_record.should_not be_true
+    found.new_record.should_not be_truthy
   end
   
   it 'returns nil when nothing is found' do

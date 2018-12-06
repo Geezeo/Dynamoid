@@ -16,11 +16,11 @@ describe "Dynamoid::Fields" do
   end
   
   it 'declares a query attribute' do
-    @address.city?.should be_false
+    @address.city?.should be_falsy
     
     @address.city = 'Chicago'
     
-    @address.city?.should be_true
+    @address.city?.should be_truthy
   end
   
   it 'automatically declares id' do

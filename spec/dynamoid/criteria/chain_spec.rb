@@ -97,16 +97,16 @@ describe "Dynamoid::Associations::Chain" do
   it 'finds range querys' do
     @chain = Dynamoid::Criteria::Chain.new(Tweet)
     @chain.query = { :tweet_id => 'test' }
-    @chain.send(:range?).should be_true
+    @chain.send(:range?).should be_truthy
 
     @chain.query = {:tweet_id => 'test', :group => 'xx'}
-    @chain.send(:range?).should be_true
+    @chain.send(:range?).should be_truthy
 
     @chain.query = { :group => 'xx' }
-    @chain.send(:range?).should be_false
+    @chain.send(:range?).should be_falsy
 
     @chain.query = { :group => 'xx', :msg => 'hai' }
-    @chain.send(:range?).should be_false
+    @chain.send(:range?).should be_falsy
   end
 
   context 'range queries' do
