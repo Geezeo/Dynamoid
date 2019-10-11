@@ -7,7 +7,7 @@ Gem::Specification.new do |gem|
   gem.license     = 'All rights reserved'
   gem.name        = 'dynamoid'
   gem.summary     = "Keeps your G's, yo."
-  gem.version     = "0.5.1"
+  gem.version     = "0.5.2"
 
   gem.add_development_dependency 'mocha',         '~> 1.1'
   gem.add_development_dependency 'rake',          '~> 10.4'
